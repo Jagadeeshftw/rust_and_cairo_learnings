@@ -8,7 +8,14 @@ struct Deck {
     cards: Vec<String>
 }
 
-fn main() {
+// This below implementation is called as `inherit implementation`
+// since this implementation name is same as the above struct
+// name, it will inherit from the above struct.
+// This inherit implementation is used to add some functions to the
+// above struct.
+impl Deck {
+    // here `-> Self` refers to return the Deck struct as return type.
+    fn new() -> Self {  
 
     let suites = ["Hearts", "Spades", "Diamonds"];
     let values = ["Ace", "Two", "Three"];
@@ -25,10 +32,17 @@ fn main() {
         }
     }
 
-    let deck = Deck { cards};
+    let deck = Deck { cards};      
+     return deck;
+    }
+
+}
+
+fn main() {
+    let deck = Deck::new();
     println!("Heres your deck: {:#?}", deck); // here {:?} itself will work
                                               // adding {:#?} will print the items
                                               // in the nicely formatted lines
-                                              
+                    
     
 }
