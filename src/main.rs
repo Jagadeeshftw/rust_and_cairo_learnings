@@ -1,3 +1,6 @@
+// `cargo new <folder-name` will initialize new cargo project.
+// `cargo run` command will run the program
+
 #[derive(Debug)]     // Its kind of importing the Debug traits.
                      // Traits contains collection of functions.
 
