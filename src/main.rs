@@ -1,6 +1,8 @@
 // `cargo new <folder-name` will initialize new cargo project.
 // `cargo run` command will run the program
 
+use rand::{thread_rng, seq::SliceRandom};
+
 #[derive(Debug)]     // Its kind of importing the Debug traits.
                      // Traits contains collection of functions.
 
@@ -14,6 +16,9 @@ struct Deck {
 // This inherit implementation is used to add some functions to the
 // above struct.
 impl Deck {
+    // This functions are called as associated functions same as class
+    //method and this is tied to the struct definition.
+    // kinda contructor you could say.
     // here `-> Self` refers to return the Deck struct as return type.
     fn new() -> Self {  
 
@@ -32,17 +37,95 @@ impl Deck {
         }
     }
 
-    let deck = Deck { cards};      
-     return deck;
+    return Deck { cards};      // explicit return
+    // Deck { cards}           // implicit return
+    // both of this return types will work, in implicit return semicolon
+    // will not come at the end.
+
+    }
+    
+    // its kinda of class method or self method. where self is the 
+    // reference pointing to the instance
+    fn shuffle(&mut self)
+    {
+        let mut rng = thread_rng();
+        self.cards.shuffle(&mut rng);
+    }
+
+    fn deal(&mut self, num_cards:usize) -> Vec<String>
+    {
+    /* 
+    split_off
+     - input = index_number;
+     -return type = return all the values from index_number to the end of the index.
+    */
+     self.cards.split_off(self.cards.len()- num_cards)
     }
 
 }
 
 fn main() {
-    let deck = Deck::new();
-    println!("Heres your deck: {:#?}", deck); // here {:?} itself will work
+    let mut deck = Deck::new();
+    deck.shuffle();
+    // needs to add error handling for larger inputs
+    // which is greater than the total number of cards.
+    let mut cards = deck.deal(2);
+
+    println!("Here's your deck: {:#?}", deck);
+    println!("Here's your hand: {:#?}", cards); // here {:?} itself will work
                                               // adding {:#?} will print the items
                                               // in the nicely formatted lines
                     
     
 }
+
+
+
+/*
+1. To install crates(packages)
+
+`cargo add <package_name>`
+e.g: cargo add rand
+
+website: https://crates.io/
+
+installed crates will be shown in Cargo.toml file
+
+2. Crates.
+
+Each crates contains the root modules and the list of sub modules.
+
+for example: In the rand crate there's one root modules called `thread_rng`
+             which can be accessed by
+             let Rand = rand::thread_rng();
+
+             and lets say there is one sub module called `seq` and that
+             has list of functions. one of the function is `SliceRandom`
+             which can be accessed by
+
+             let Rand = rand::seq::SliceRandom();
+
+             But when we use our own modules in that case we need to import it
+             `mod <sub_module_name`;
+             e.g: mod games;
+             let game = games::<function_name>();
+
+`use` Keyword:
+
+`
+use rand::thread_rng;
+
+let rand = thread_rng();
+`
+as you can see above using the `use` keyword, we can directly access the
+function. we can do the same thing for submodules as well.
+
+`
+use Rand::{thread_rng, random, rngs::OsRng};
+let osRng = OsRng();
+`
+         
+*/
+
+
+
