@@ -79,4 +79,23 @@ fn main() {
         }
     }
 
+    // there are some other approches which is simple.
+    println!("{:#?}", castal.items.get(0).unwrap());
+
+// item.unwrap()
+// 
+// If item is a Some, returns the value in the Some.
+// If item is a None, panics!
+// Use for quick debugging or examples.
+// item.expect("There should be a value here")
+// 
+// If item is a Some, returns the value in the Some.
+// If item is a None, prints the provided debug message and panics!
+// Use when we want to crash if there is no value.
+// item.unwrap_or(&placeholder)
+// 
+// If item is a Some, returns the value in the Some.
+// If item is a None, returns the provided default value.
+// Use when it makes sense to provide a fallback value.
+
 }
